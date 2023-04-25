@@ -3,37 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulysse <ulysse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:45:52 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/25 15:38:58 by uclement         ###   ########.fr       */
+/*   Updated: 2023/04/25 19:09:07 by ulysse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 
-void	index_maker(t_list *stack)
+void	index_maker(t_list **stack)
 {
 	t_list	*tmp;
+	t_list	*first;
 	int		i;
-	int		base;
 
-	base = 0;
-	while (stack->next != NULL)
-	{
-		tmp = stack->next; //commence 2eme node
-		
-		i = base + 1;
+	first = *stack;
+	tmp = (*stack)->next;
+	while ((*stack) != NULL)
+	{		
+		i = 1;
 		while (tmp != NULL)
 		{
-			if ((stack->content) > (tmp->content)) // si node plus grand i++
+			if (((*stack)->content) > (tmp->content))
 				i++;
 			tmp = tmp->next;
 		}
-		stack->index = i;
-		stack = stack->next;
+		tmp = first;
+		(*stack)->index = i;
+		*stack = (*stack)->next;
 	}
+	*stack = first;
 }
 
 void	error_exit(void)
@@ -65,6 +66,14 @@ void	print_list(t_list *node)
 		node = node->next;
 	}
 }
+void	print_index(t_list *node)
+{
+	while (node != NULL)
+	{
+		printf("%d ", node->index);
+		node = node->next;
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -81,6 +90,9 @@ int	main(int argc, char **argv)
 	}
 	if (parsing(stack_a) == 0)
 		error_exit();
+	index_maker(&stack_a);
 	print_list(stack_a);
+	printf("\n");
+	print_index(stack_a);
 	free_lst(stack_a);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulysse <ulysse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:28:29 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/25 14:00:57 by uclement         ###   ########.fr       */
+/*   Updated: 2023/04/25 18:37:26 by ulysse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	tri(t_list **stack_a, t_list **stack_b, int call);
 void	tri_2(t_list **stack_a, t_list **stack_b, int call);
 void	print_tri(int call);
 
+void	index_maker(t_list **stack);
 
 
 #endif
