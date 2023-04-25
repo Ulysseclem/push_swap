@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:14:37 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/24 10:40:48 by uclement         ###   ########.fr       */
+/*   Updated: 2023/04/25 15:17:01 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 
 typedef struct s_list
 {
-	int			content;
+	int				content;
+	int				index;
 	struct s_list	*next;
 }					t_list;
 

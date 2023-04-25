@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:37:03 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/24 16:52:44 by uclement         ###   ########.fr       */
+/*   Updated: 2023/04/25 14:06:43 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,16 @@ void	push(t_list **receiver, t_list **sender)
 	tmp->next = NULL;
 	ft_lstadd_front(receiver, tmp);
 	*sender = dele(*sender);
-	// free(tmp);
 }
 
-void	rotate(t_list	**stack)
+void	rotate(t_list **stack)
 {
 	t_list	*tmp;
 
 	tmp = ps_lstnew((*stack)->content);
 	ft_lstadd_back(stack, tmp);
 	*stack = dele(*stack);
-	// print_list(*stack);
+
 }
 
 void	reverse(t_list	**stack)
@@ -61,7 +60,76 @@ void	reverse(t_list	**stack)
 		last = last->next;
 	prev = last;
 	last = last->next;
-	prev->next= NULL;
+	prev->next = NULL;
 	last->next = *stack;
 	*stack = last;
+}
+
+void	tri(t_list **stack_a, t_list **stack_b, int call)
+{
+	if (call == 1)
+		pair_swap(stack_a);
+	else if (call == 2)
+		pair_swap(stack_b);
+	else if (call == 3)
+	{
+		pair_swap(stack_b);
+		pair_swap(stack_b);
+	}
+	else if (call == 4)
+		push(stack_a, stack_b);
+	else if (call == 5)
+		push(stack_b, stack_a);
+	else if (call == 6)
+		rotate(stack_a);
+	else if (call == 7)
+		rotate(stack_b);
+	else if (call == 8)
+	{
+		rotate(stack_b);
+		rotate(stack_b);
+	}
+	else if (call > 8)
+		tri_2(stack_a, stack_b, call);
+	print_tri(call);
+}
+
+
+void	tri_2(t_list **stack_a, t_list **stack_b, int call)
+{
+	if (call == 9)
+		reverse(stack_a);
+	else if (call == 10)
+		reverse(stack_b);
+	else if (call == 11)
+	{
+		reverse(stack_b);
+		reverse(stack_b);
+	}
+}
+
+void	print_tri(int call)
+{
+	if (call == 1)
+		printf("sa");
+	if (call == 2)
+		printf("sb");
+	if (call == 3)
+		printf("ss");
+	if (call == 4)
+		printf("pa");
+	if (call == 5)
+		printf("pb");
+	if (call == 6)
+		printf("ra");
+	if (call == 7)
+		printf("rb");
+	if (call == 8)
+		printf("rr");
+	if (call == 9)
+		printf("rra");
+	if (call == 10)
+		printf("rrb");
+	if (call == 11)
+		printf("rrr");
 }

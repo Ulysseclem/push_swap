@@ -6,7 +6,7 @@
 #    By: uclement <uclement@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 12:28:28 by uclement          #+#    #+#              #
-#    Updated: 2023/04/24 11:33:31 by uclement         ###   ########.fr        #
+#    Updated: 2023/04/25 11:36:00 by uclement         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ END 	= \033[0m
 
 NAME = libft.a
 
-SRC = ./ft_isalpha.c \
+SRC = 		./ft_isalpha.c \
 			./ft_isdigit.c \
 			./ft_isalnum.c \
 			./ft_isascii.c \
@@ -63,14 +63,15 @@ SRC = ./ft_isalpha.c \
 
 OBJS = $(SRC:%.c=%.o)
 
-CC = gcc -g
+CC			= gcc -g
+RM			= rm -f
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -Iincludes
 
 all: $(NAME)
 
 %.o: %.c
-	@$(CC) -c $(cflags) $< -o $@ -I.
+	@$(CC) $(CFLAGS) -c  $< -o $@ -I.
 
 $(NAME): $(OBJS)
 	@ar -rcs $(NAME) $(OBJS) 

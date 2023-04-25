@@ -3,24 +3,16 @@ RED 	= \033[0;31m
 BLUE 	= \033[0;34m
 END 	= \033[0m
 
-
-# DIRSRC		= ./srcs/
-
-# DIRINC		= ./includes/pushswap.h
-
 DIRLIB		= ./libft/
 
 SRCS		= ./srcs/push_swap.c \
 			  ./srcs/swap_function.c \
 			  ./srcs/swap_utils.c \
-
-# HEAD		= ./includes/ 
+			  ./srcs/parsing.c \
 
 OBJS		= ${SRCS:.c=.o}
 
-NAME		= pushswap.a
-
-# NAMELIBFT	= libft.a
+NAME		= push_swap.a
 
 CC			= gcc -g
 RM			= rm -f
