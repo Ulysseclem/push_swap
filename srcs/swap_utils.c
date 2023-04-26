@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:12:39 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/24 15:15:00 by uclement         ###   ########.fr       */
+/*   Updated: 2023/04/26 19:06:29 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,19 @@
 
 t_list	*dele(t_list *head)
 {
-	t_list	*curr;
+	t_list	*current;
+	t_list	*prev;
 
-	curr = head;
-
-	if (head != NULL)
+	current = head;
+	while (current->next != NULL)
 	{
-		head = head->next;
-		free(curr);
+		prev = current;
+		current = current->next;
 	}
+
+	prev->next = NULL;
+	if (current != NULL)
+		free(current);
 	return (head);
 }
 

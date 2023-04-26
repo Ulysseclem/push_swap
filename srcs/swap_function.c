@@ -6,37 +6,65 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:37:03 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/25 14:06:43 by uclement         ###   ########.fr       */
+/*   Updated: 2023/04/26 19:04:14 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 
-void	pair_swap(t_list **head)
-{
-	t_list	*curr;
-	t_list	*prev;
+// void	pair_swap(t_list **head)
+// {
+// 	t_list	*curr;
+// 	t_list	*prev;
 
-	if (!head)
+// 	if (!head)
+// 		return ;
+// 	if (head == NULL || (*head)->next == NULL)
+// 		return ;
+// 	curr = (*head)->next->next;
+// 	prev = *head;
+// 	*head = (*head)->next;
+// 	(*head)->next = prev;
+// 	prev->next = curr;
+// }
+
+void	pair_swap(t_list **stack)
+{
+	t_list	*prev;
+	t_list	*current;
+	t_list	*last;
+
+	prev = NULL;
+	current = *stack;
+	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-	if (head == NULL || (*head)->next == NULL)
-		return ;
-	curr = (*head)->next->next;
-	prev = *head;
-	*head = (*head)->next;
-	(*head)->next = prev;
-	prev->next = curr;
+	while (current->next->next != NULL)
+	{
+		prev = current;
+		current = current->next;
+	}
+	last = current->next;
+	current->next = NULL;
+	last->next = current;
+	if (prev != NULL)
+		prev->next = last;
+	else
+		*stack = last;
 }
+
 
 void	push(t_list **receiver, t_list **sender)
 {
 	t_list	*tmp;
+	t_list	*current;
 
+	current = ft_lstlast(*sender);
 	tmp = malloc(sizeof(t_list));
-	tmp->content = (*sender)->content;
+	tmp->content = current->content;
+	tmp->index = current->index;
 	tmp->next = NULL;
-	ft_lstadd_front(receiver, tmp);
+	ft_lstadd_back(receiver, tmp);
 	*sender = dele(*sender);
 }
 
@@ -45,6 +73,7 @@ void	rotate(t_list **stack)
 	t_list	*tmp;
 
 	tmp = ps_lstnew((*stack)->content);
+	tmp->index = (*stack)->index;
 	ft_lstadd_back(stack, tmp);
 	*stack = dele(*stack);
 

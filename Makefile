@@ -5,10 +5,13 @@ END 	= \033[0m
 
 DIRLIB		= ./libft/
 
+DIROBJS		= ./objs/
+
 SRCS		= ./srcs/push_swap.c \
 			  ./srcs/swap_function.c \
 			  ./srcs/swap_utils.c \
 			  ./srcs/parsing.c \
+			  ./srcs/radix.c \
 
 OBJS		= ${SRCS:.c=.o}
 

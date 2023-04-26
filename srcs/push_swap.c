@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulysse <ulysse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:45:52 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/25 19:09:07 by ulysse           ###   ########.fr       */
+/*   Updated: 2023/04/26 18:55:43 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	to_list_a(char *argv, t_list **stack_a)
 	new_node->content = nbr;
 	new_node->index = 0;
 	new_node->next = NULL;
-	ft_lstadd_front(stack_a, new_node);
+	ft_lstadd_back(stack_a, new_node);
 }
 
 void	print_list(t_list *node)
@@ -65,6 +65,7 @@ void	print_list(t_list *node)
 		printf("%d ", node->content);
 		node = node->next;
 	}
+	printf(" end");
 }
 void	print_index(t_list *node)
 {
@@ -79,6 +80,7 @@ int	main(int argc, char **argv)
 {
 	int	i;
 	t_list	*stack_a = NULL;
+	t_list	*stack_b = NULL;
 
 	i = 1;
 	if (argc <= 1)
@@ -93,6 +95,13 @@ int	main(int argc, char **argv)
 	index_maker(&stack_a);
 	print_list(stack_a);
 	printf("\n");
-	print_index(stack_a);
+	// median_sort(&stack_a, &stack_b);
+	push(&stack_b, &stack_a);
+	printf("\n B : ");
+	print_list(stack_b);
+	// three(&stack_a);
+	printf("\n");
+	print_list(stack_a);
+	
 	free_lst(stack_a);
 }
