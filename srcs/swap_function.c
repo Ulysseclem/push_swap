@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:37:03 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/26 19:04:14 by uclement         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:20:47 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,45 +53,66 @@ void	pair_swap(t_list **stack)
 		*stack = last;
 }
 
-
 void	push(t_list **receiver, t_list **sender)
 {
+	t_list	*curr;
+	t_list	*prev;
 	t_list	*tmp;
-	t_list	*current;
 
-	current = ft_lstlast(*sender);
-	tmp = malloc(sizeof(t_list));
-	tmp->content = current->content;
-	tmp->index = current->index;
-	tmp->next = NULL;
-	ft_lstadd_back(receiver, tmp);
-	*sender = dele(*sender);
+	if (*sender == NULL)
+		return ;
+	if ((*sender)->next == NULL)
+	{
+		if (*receiver == NULL)
+			*receiver = *sender;
+		else
+		{
+			curr = ft_lstlast(*receiver);
+			curr->next = *sender;
+		}
+		*sender = NULL;
+		return ;
+	}
+	curr = *sender;
+	while (curr->next != NULL)
+	{
+		prev = curr;
+		curr = curr->next;
+	}
+	if (*receiver == NULL)
+		*receiver = curr;
+	else
+	{
+		tmp = ft_lstlast(*receiver);
+		tmp->next = curr;
+	}
+	prev->next = NULL;
 }
 
 void	rotate(t_list **stack)
 {
 	t_list	*tmp;
+	t_list	*current;
 
-	tmp = ps_lstnew((*stack)->content);
-	tmp->index = (*stack)->index;
-	ft_lstadd_back(stack, tmp);
+	current = ft_lstlast(*stack);
+	tmp = ps_lstnew(current->content);
+	tmp->index = current->index;
+	tmp->next = NULL;
+	ft_lstadd_front(stack, tmp);
 	*stack = dele(*stack);
-
 }
 
 void	reverse(t_list	**stack)
 {
-	t_list	*last;
-	t_list	*prev;
+	t_list	*tmp;
+	t_list	*current;
 
-	last = *stack;
-	while (last->next->next != NULL)
-		last = last->next;
-	prev = last;
-	last = last->next;
-	prev->next = NULL;
-	last->next = *stack;
-	*stack = last;
+	tmp = ps_lstnew((*stack)->content);
+	tmp->index = (*stack)->index;
+	tmp->next = NULL;
+	current = ft_lstlast(*stack);
+	current->next = tmp;
+	*stack = (*stack)->next;
 }
 
 void	tri(t_list **stack_a, t_list **stack_b, int call)
@@ -138,27 +159,27 @@ void	tri_2(t_list **stack_a, t_list **stack_b, int call)
 }
 
 void	print_tri(int call)
-{
+{	
 	if (call == 1)
-		printf("sa");
+		printf("sa\n");
 	if (call == 2)
-		printf("sb");
+		printf("sb\n");
 	if (call == 3)
-		printf("ss");
+		printf("ss\n");
 	if (call == 4)
-		printf("pa");
+		printf("pa\n");
 	if (call == 5)
-		printf("pb");
+		printf("pb\n");
 	if (call == 6)
-		printf("ra");
+		printf("ra\n");
 	if (call == 7)
-		printf("rb");
+		printf("rb\n");
 	if (call == 8)
-		printf("rr");
+		printf("rr\n");
 	if (call == 9)
-		printf("rra");
+		printf("rra\n");
 	if (call == 10)
-		printf("rrb");
+		printf("rrb\n");
 	if (call == 11)
-		printf("rrr");
+		printf("rrr\n");
 }

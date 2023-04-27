@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:26:01 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/26 18:21:22 by uclement         ###   ########.fr       */
+/*   Updated: 2023/04/27 17:35:52 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,105 @@ void	median_sort(t_list **a, t_list **b)
 
 // }
 
-// void	five(t_list **stack)
-// {
-// 	/*Lire la chaine et stocker la valeur en haut de la pile
-// 	- si le content est > a next->content et < haut de pile alors on regarde le suivant
-// 	- si le content est < a next->content et < haute de pile alors on reverse le bas de la pile vers le haut
-// 	- si le content est < a next->content et > haut de pile alors on push le haut de pile et on deplace le bas */
 
-// }
+/* 
+
+liste range -> je parcour les valeurs et j'insere la valeur des que b > que a->next (avant a->next)
+
+
+
+*/
+
+void	sort(t_list **stack)
+{
+	t_list	*current;
+	int		nbr;
+	int		count;
+	current = *stack;
+	nbr = current->content;
+	count = 1;
+	current = current->next;
+
+	while (current != NULL)
+	{
+		if (current->content < nbr)
+			count++;
+		else
+			break ;
+		current = current->next;
+	}
+	if (count == ft_lstsize(*stack))
+		return ;
+	if (count <= (ft_lstsize(*stack) / 2))
+	{
+		while (count > 0)		
+		{
+			tri(stack, NULL, 9);
+			count--;
+		}
+	}
+	else
+	{
+		count = ft_lstsize(*stack) - count;
+		while (count > 0)		
+		{
+			tri(stack, NULL, 6);
+			count--;
+		}
+	}
+}
+
+
+void	five(t_list **a, t_list **b)
+{
+	t_list	*current;
+	t_list	*curr_b;
+	int		count;
+	int		j;
+
+	tri(a, b, 5);
+	tri(a, b, 5);
+	three(a);
+	j = 2;
+	while (j > 0)
+	{
+		count = 0;
+		curr_b = ft_lstlast(*b);
+		current = *a;
+		while (current != NULL)
+		{
+			if (curr_b->content < current->content) 
+				count++;
+			current = current->next;
+		}
+		if (count < (ft_lstsize(*a)/2))
+		{
+			while (count != 0)
+			{
+				tri(a, b, 9);
+				count--;
+			}
+			tri(a, b, 4);
+			sort(a);
+		}
+		else 
+		{
+			count = ft_lstsize(*a) - count;
+			while (count != 0)
+			{
+				tri(a, b, 6);
+				count--;
+			}
+			tri(a, b, 4);
+			// printf("\n liste :");
+			// print_list(*a);
+			sort(a);
+
+		}
+		j--;
+	}
+}
+
 
 void	three(t_list **a)
 {
@@ -66,16 +157,15 @@ void	three(t_list **a)
 	top = (*a)->next->next->content;
 	mid = (*a)->next->content;
 	bot = (*a)->content;
-
-	if (bot > mid && bot > top && mid < top)
-		tri(a, NULL, 1);
+	if (bot > mid && bot < top && mid < top)
+		tri(a, NULL, 6);
 	else if (bot < mid && bot < top && mid < top)
 	{
 		tri(a,  NULL, 1);
 		tri(a, NULL, 9);
 	}
-	else if (bot > mid && bot < top && mid < top)
-		tri(a, NULL, 6);
+	else if (bot > mid && bot > top && mid < top)
+		tri(a, NULL, 1);
 	else if (bot < mid && bot > top && mid > top)
 	{
 		tri(a, NULL, 1);

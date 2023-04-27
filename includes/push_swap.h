@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:28:29 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/26 18:43:24 by uclement         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:04:46 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	print_tri(int call);
 void	index_maker(t_list **stack);
 void	median_sort(t_list **a, t_list **b);
 void	three(t_list **a);
+void	five(t_list **a, t_list **b);
+void	sort(t_list **stack);
 
 
 
