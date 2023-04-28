@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:45:52 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/27 13:54:26 by uclement         ###   ########.fr       */
+/*   Updated: 2023/04/28 16:01:47 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,10 @@ int	main(int argc, char **argv)
 	print_list(stack_a);
 	printf("\n");
 	// median_sort(&stack_a, &stack_b);
+
 	five(&stack_a, &stack_b);
 	printf("\n");
 	print_list(stack_a);
 	free_lst(stack_a);
 }
+

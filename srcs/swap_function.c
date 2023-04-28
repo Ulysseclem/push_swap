@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:37:03 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/27 16:20:47 by uclement         ###   ########.fr       */
+/*   Updated: 2023/04/28 10:10:20 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,9 @@ void	tri_2(t_list **stack_a, t_list **stack_b, int call)
 
 void	print_tri(int call)
 {	
+	static int	count;
+	
+	count = count + 0;
 	if (call == 1)
 		printf("sa\n");
 	if (call == 2)
@@ -182,4 +185,6 @@ void	print_tri(int call)
 		printf("rrb\n");
 	if (call == 11)
 		printf("rrr\n");
+	count++;
+	printf("%d", count);
 }

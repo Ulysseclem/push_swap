@@ -6,12 +6,20 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:26:01 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/27 17:35:52 by uclement         ###   ########.fr       */
+/*   Updated: 2023/04/28 16:05:56 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
+
+
+void	compteur()
+{
+	static struc count;
+	
+
+}
 
 void	median_sort(t_list **a, t_list **b)
 {
@@ -38,30 +46,64 @@ void	median_sort(t_list **a, t_list **b)
 	printf("\n \n count = %d \n",count);
 }
 
-// void	compteur(t_list *a, t_list **b)
-// {
-// /*Je prends le b->content et je cherche la position ou il faut le mettre
-// 	- je parcours une liste trie, je le positionne entre la valeur < et >
-// 	- je count la chaine parcouru pour savoir si je dois rotate ou reverse (si count superieusr a size/2 = rotate)
-// 	- je simule les coups
-// je pleure*/
+void	hundred(t_list **a, t_list **b)
+{
+	t_list	*current;
+	int		count;
+	int		nbr;
 
-// }
+	current = *a;
+	count = 1;
+	nbr = ft_lstlast(*b)->content;
+	while (current != NULL)
+	{
+		if (nbr < current->content && (current->next == NULL || nbr > current->next->content))				
+			break ;
+		else if (nbr > current->content && nbr > current->next->content) // si nbr plus grand que valeur et valeur.suivante
+		{
+			if (current->content < current->next->content) //si la a un moment donne valeur < valeur.suivante alors on break 
+				break ;
+			tri(a,b,4);										// sinon cela veut dire qu'on a tout traverse et la valeur la plus grand est bien la valeur du debut, donc un push et rotate
+			tri(a,b,6);
+			return;
+		}
+		count++;
+		current = current ->next;
+	}
+	order(a,b,count);
+}
 
-
-/* 
-
-liste range -> je parcour les valeurs et j'insere la valeur des que b > que a->next (avant a->next)
-
-
-
-*/
+void	order(t_list **a, t_list **b, int count)
+{
+	if (count <= (ft_lstsize(*a)/2))
+	{
+		while (count != 0)
+		{
+			tri(a, b, 9);
+			count--;
+		}
+		tri(a, b, 4);
+		sort(a);
+	}
+	else 
+	{
+		count = ft_lstsize(*a) - count;
+		while (count != 0)
+		{
+			tri(a, b, 6);
+			count--;
+		}
+		tri(a, b, 4);
+		sort(a);
+	}
+}
 
 void	sort(t_list **stack)
 {
 	t_list	*current;
 	int		nbr;
 	int		count;
+
 	current = *stack;
 	nbr = current->content;
 	count = 1;
@@ -99,52 +141,11 @@ void	sort(t_list **stack)
 
 void	five(t_list **a, t_list **b)
 {
-	t_list	*current;
-	t_list	*curr_b;
-	int		count;
-	int		j;
-
 	tri(a, b, 5);
 	tri(a, b, 5);
 	three(a);
-	j = 2;
-	while (j > 0)
-	{
-		count = 0;
-		curr_b = ft_lstlast(*b);
-		current = *a;
-		while (current != NULL)
-		{
-			if (curr_b->content < current->content) 
-				count++;
-			current = current->next;
-		}
-		if (count < (ft_lstsize(*a)/2))
-		{
-			while (count != 0)
-			{
-				tri(a, b, 9);
-				count--;
-			}
-			tri(a, b, 4);
-			sort(a);
-		}
-		else 
-		{
-			count = ft_lstsize(*a) - count;
-			while (count != 0)
-			{
-				tri(a, b, 6);
-				count--;
-			}
-			tri(a, b, 4);
-			// printf("\n liste :");
-			// print_list(*a);
-			sort(a);
-
-		}
-		j--;
-	}
+	hundred(a, b);
+	hundred(a, b);
 }
 
 

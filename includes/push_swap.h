@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:28:29 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/27 14:04:46 by uclement         ###   ########.fr       */
+/*   Updated: 2023/04/28 16:04:15 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,20 @@
 # include "libft.h"
 # include <stdio.h> //
 
-
+typedef struct s_function
+{
+	int				sa;
+	int				sb;
+	int				ss;
+	int				pa;
+	int				pb;
+	int				ra;
+	int				rb;
+	int				rr;
+	int				rra;
+	int				rrb;
+	int				rrr;
+} struc;
 
 void	pair_swap(t_list **stack);
 void	print_list(t_list *node);
@@ -46,6 +59,8 @@ void	three(t_list **a);
 void	five(t_list **a, t_list **b);
 void	sort(t_list **stack);
 
+void	hundred(t_list **a, t_list **b);
+void	order(t_list **a, t_list **b, int count);
 
 
 
