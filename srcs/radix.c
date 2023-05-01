@@ -6,44 +6,43 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:26:01 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/28 16:05:56 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/01 15:40:39 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 
-
-void	compteur()
-{
-	static struc count;
-	
-
-}
-
 void	median_sort(t_list **a, t_list **b)
 {
 	int	size;
-	int	i;
-	int count = 0;
+	int i;
 
 	size = ft_lstsize(*a);
 
-	while (ft_lstsize(*a) > 5)
+	while (ft_lstsize(*a) > 2)
 	{
 		i = 0;
 		while (i < size)
 		{
-			if ((*a)->index >= (size / 2))
+			if ((*a)->index > (size / 2))
+			{
+				tri(a, b, 9);
 				tri(a, b, 5);
+			}
 			else
-				tri(a, b, 6);
+				tri(a, b, 9);
 			i++;
-			count++;
 		}
 		size = ft_lstsize(*a);
 	}
-	printf("\n \n count = %d \n",count);
+	if (ft_lstsize(*a) == 3)
+		three(a);
+	if (ft_lstsize(*a) == 2)
+	{
+		if ((*a)->content < (*a)->next->content)
+			tri(a, b, 1);
+	}
 }
 
 void	hundred(t_list **a, t_list **b)
@@ -53,7 +52,7 @@ void	hundred(t_list **a, t_list **b)
 	int		nbr;
 
 	current = *a;
-	count = 1;
+	count = 1; 
 	nbr = ft_lstlast(*b)->content;
 	while (current != NULL)
 	{
@@ -83,7 +82,7 @@ void	order(t_list **a, t_list **b, int count)
 			count--;
 		}
 		tri(a, b, 4);
-		sort(a);
+		// sort(a);
 	}
 	else 
 	{
@@ -94,7 +93,7 @@ void	order(t_list **a, t_list **b, int count)
 			count--;
 		}
 		tri(a, b, 4);
-		sort(a);
+		// sort(a);
 	}
 }
 

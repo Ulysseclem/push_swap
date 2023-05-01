@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:45:52 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/28 16:01:47 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/01 16:59:44 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,37 @@ void	to_list_a(char *argv, t_list **stack_a)
 	ft_lstadd_back(stack_a, new_node);
 }
 
-void	print_list(t_list *node)
+void	print_list(t_list *a, t_list *b)
 {
-	while (node != NULL)
+	while (a != NULL || b != NULL)
 	{
-		printf("%d ", node->content);
-		node = node->next;
+		if (b == NULL)
+			b = ft_lstnew(NULL);
+		if (a == NULL)
+			a = ft_lstnew(NULL);
+		printf("| %d | %d |V| %d | %d |\n", a->content,a->index, b->content, b->index);
+		if (a != NULL)
+			a = a->next;
+		if (b != NULL)
+			b = b->next;
 	}
-	printf(" end");
 }
 void	print_index(t_list *node)
 {
 	while (node != NULL)
 	{
 		printf("%d ", node->index);
+		node = node->next;
+	}
+}
+void	clean_index(t_list **stack)
+{
+	t_list *node;
+
+	node = *stack;
+	while (node != NULL)
+	{
+		node->index = 0;
 		node = node->next;
 	}
 }
@@ -93,13 +110,18 @@ int	main(int argc, char **argv)
 	if (parsing(stack_a) == 0)
 		error_exit();
 	index_maker(&stack_a);
-	print_list(stack_a);
+	print_list(stack_a, stack_b);
 	printf("\n");
-	// median_sort(&stack_a, &stack_b);
+	median_sort(&stack_a, &stack_b);
+	clean_index(&stack_a);
+	clean_index(&stack_b);
 
-	five(&stack_a, &stack_b);
-	printf("\n");
-	print_list(stack_a);
+	index_mover(&stack_a, &stack_b);
+	// five(&stack_a, &stack_b);
+	print_list(stack_a,stack_b);
+	printf("\n inddex :");
+	print_index(stack_b);
+
 	free_lst(stack_a);
 }
 

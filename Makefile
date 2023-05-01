@@ -12,6 +12,7 @@ SRCS		= ./srcs/push_swap.c \
 			  ./srcs/swap_utils.c \
 			  ./srcs/parsing.c \
 			  ./srcs/radix.c \
+			  ./srcs/move_calculator.c \
 
 OBJS		= ${SRCS:.c=.o}
 

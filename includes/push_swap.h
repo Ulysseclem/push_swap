@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:28:29 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/28 16:04:15 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/01 16:07:25 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ typedef struct s_function
 	int				rra;
 	int				rrb;
 	int				rrr;
-} struc;
+} instruct;
 
 void	pair_swap(t_list **stack);
-void	print_list(t_list *node);
+void	print_list(t_list *a, t_list *b);
 void	to_list_a(char *argv,t_list **stack_a);
 void	error_exit(void);
 void	push(t_list **receiver, t_list **sender);
@@ -51,7 +51,7 @@ int	parsing(t_list	*lst);
 
 void	tri(t_list **stack_a, t_list **stack_b, int call);
 void	tri_2(t_list **stack_a, t_list **stack_b, int call);
-void	print_tri(int call);
+void	print_tri(int call, t_list *a, t_list *b);
 
 void	index_maker(t_list **stack);
 void	median_sort(t_list **a, t_list **b);
@@ -62,6 +62,14 @@ void	sort(t_list **stack);
 void	hundred(t_list **a, t_list **b);
 void	order(t_list **a, t_list **b, int count);
 
+void	compteur(instruct *count, int call);
+void	calculateur(t_list **b, int call);
+t_list	*search_index_min(t_list *b);
+void	index_mover(t_list **a, t_list **b);
+void	thinker(t_list **a, t_list **b);
+void	thinker_order(t_list **a, t_list **b, int count);
+
+void	clean_index(t_list **node);
 
 
 #endif
