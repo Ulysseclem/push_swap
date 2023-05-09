@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:28:29 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/01 16:07:25 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:49:34 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,20 @@ void	print_tri(int call, t_list *a, t_list *b);
 
 void	index_maker(t_list **stack);
 void	median_sort(t_list **a, t_list **b);
-void	three(t_list **a);
+void	three(t_list **a, t_list **b);
 void	five(t_list **a, t_list **b);
-void	sort(t_list **stack);
+void	sort(t_list **stack, t_list **b);
 
 void	hundred(t_list **a, t_list **b);
 void	order(t_list **a, t_list **b, int count);
 
 void	compteur(instruct *count, int call);
 void	calculateur(t_list **b, int call);
-t_list	*search_index_min(t_list *b);
+void	search_index_min(t_list **a, t_list **b);
 void	index_mover(t_list **a, t_list **b);
 void	thinker(t_list **a, t_list **b);
 void	thinker_order(t_list **a, t_list **b, int count);
+void	ro_re_maker(t_list **a, t_list **b, int min);
 
 void	clean_index(t_list **node);
 

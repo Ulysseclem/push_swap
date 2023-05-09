@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:37:03 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/01 16:19:36 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:38:57 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,8 @@ void	print_tri(int call, t_list *a, t_list *b)
 	if (call == 11)
 		printf("rrr\n");
 	count++;
-	printf("%d\n", count);
-	print_list(a, b);
-
+	(void) a;
+	(void) b;
+	// printf("%d\n", count);
+	// print_list(a, b);
 }

@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:49:48 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/01 15:45:49 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:16:41 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	calculateur(t_list **b, int call) //ajouter l element de la liste b
 		count.rrb--;
 		count.rra--;
 	}
-	count.pb = 1;
-	if (count.pa > 0 && count.pb > 0)
+	if (count.pa >= 1)
 	{
 		size = count.sa + count.sb + count.ss + count.ra + count.rb + count.rr \
-		+ count.rra + count.rrb + count.rrr + 1;
+		+ count.rra + count.rrb + count.rrr + count.pa;
 		(*b)->index = size;
 		size = 0;
+		ft_memset(&count, 0, sizeof(count));
 	}
 }
 
@@ -73,32 +73,105 @@ void	compteur(instruct *count, int call)
 		count->rrr = 1 + count->rrr;
 }
 
-// t_list	*search_index_min(t_list *b)
-// {
-// 	t_list *current;
+void	search_index_min(t_list **a, t_list **b)
+{
+	t_list *current;
+	t_list	*min;
 	
-// 	current = b;
-// 	while (b != NULL)
-// 	{
-// 		if(current->content > b->content)
-// 			current->content = b->content
-// 		b = b->next;
-// 	}
-// 	return (current);
-// }
+	min = ft_lstnew(NULL);
+	current = *b;
+	min->index = current->index;
+	min->content = current->content;
+	if (current->next == NULL)
+	{
+		min->content = current->content;
+		ro_re_maker(a, b, min->content);
+		return ;
+	}
+	while (current != NULL)
+	{
+		if(current->index < min->index)
+		{
+			min->index = current->index;
+			min->content = current->content;
+		}
+		current = current->next;
+	}
+	ro_re_maker(a, b, min->content);
+}
+
+void	ro_re_maker(t_list **a, t_list **b, int min)
+{
+	t_list *current;
+	int i;
+	int size;
+	
+	size = ft_lstsize(*b);
+	current = (*b);
+	i = 1;
+	while (current->content != min)
+	{
+		i++;
+		current = current->next;
+	}
+	if (i <= size/2)
+	{
+		while (i)
+		{
+			tri(a, b, 10);
+			i--;
+		}
+		hundred(a, b);
+		return;
+	}
+	if (i > size/2)
+	{
+		i = size - i;
+		while (i)
+		{
+			tri(a, b, 7);
+			i--;
+		}
+		hundred(a, b);
+		return;
+	}
+}
 
 void	index_mover(t_list **a, t_list **b)
 {
-	t_list *first;
+	t_list	*current;
+	int		size;
+	int		i;
+	int		j;
 	
-	first = *b;
-	while ((*b) != NULL)
+	size = ft_lstsize(*b);
+	i = 1;
+	current = *b;
+	while (current != NULL)
 	{
-		thinker(a, b);
-		// calculateur(b,7); // ajouter une condition entre rb et rrb en fonction de la size de b
-		*b = (*b)->next;
+		if (i <= (size / 2))
+		{
+			j = i;
+			while (j)
+			{
+			calculateur(b, 10);
+			j--;
+			}
+		}
+		else
+		{
+			j = size - i;
+			while (j)
+			{
+			calculateur(b, 7);
+			j--;
+			}
+		}
+		thinker(a, &current);
+		i++;
+		current = current->next;
 	}
-	*b = first;
+	search_index_min(a, b);
 }
 
 void	thinker(t_list **a, t_list **b)
@@ -108,23 +181,17 @@ void	thinker(t_list **a, t_list **b)
 	int		nbr;
 
 	current = *a;
-	count = 1; 
-	nbr = ft_lstlast(*b)->content;
-	while (current != NULL)
-	{
-		if (nbr < current->content && (current->next == NULL || nbr > current->next->content))				
-			break ;
-		else if (nbr > current->content && nbr > current->next->content) // si nbr plus grand que valeur et valeur.suivante
+	count = 1;
+	nbr = (*b)->content;
+	while (current->next != NULL)
 		{
-			if (current->content < current->next->content) //si la a un moment donne valeur < valeur.suivante alors on break 
+			if (nbr < current->content && (current->next == NULL || nbr > current->next->content))
 				break ;
-			calculateur(b,4);										// sinon cela veut dire qu'on a tout traverse et la valeur la plus grand est bien la valeur du debut, donc un push et rotate
-			calculateur(b,6);
-			return;
+			if (current->content < current->next->content && nbr > current->next->content)
+				break;
+			count++;
+			current = current->next;
 		}
-		count++;
-		current = current ->next;
-	}
 	thinker_order(a,b,count);
 }
 

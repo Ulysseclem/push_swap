@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:26:01 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/01 15:40:39 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:48:47 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	median_sort(t_list **a, t_list **b)
 {
 	int	size;
 	int i;
+	t_list *current;
+	t_list *last;
 
 	size = ft_lstsize(*a);
 
@@ -25,19 +27,18 @@ void	median_sort(t_list **a, t_list **b)
 		i = 0;
 		while (i < size)
 		{
-			if ((*a)->index > (size / 2))
-			{
-				tri(a, b, 9);
+			current = *a;
+			last = ft_lstlast(current);
+			if (last->index > (size / 2))
 				tri(a, b, 5);
-			}
 			else
-				tri(a, b, 9);
+				tri(a, b, 6);
 			i++;
 		}
 		size = ft_lstsize(*a);
 	}
 	if (ft_lstsize(*a) == 3)
-		three(a);
+		three(a, b);
 	if (ft_lstsize(*a) == 2)
 	{
 		if ((*a)->content < (*a)->next->content)
@@ -54,23 +55,53 @@ void	hundred(t_list **a, t_list **b)
 	current = *a;
 	count = 1; 
 	nbr = ft_lstlast(*b)->content;
-	while (current != NULL)
-	{
-		if (nbr < current->content && (current->next == NULL || nbr > current->next->content))				
-			break ;
-		else if (nbr > current->content && nbr > current->next->content) // si nbr plus grand que valeur et valeur.suivante
+	while (current->next != NULL)
 		{
-			if (current->content < current->next->content) //si la a un moment donne valeur < valeur.suivante alors on break 
+			if (nbr < current->content && (current->next == NULL || nbr > current->next->content))
 				break ;
-			tri(a,b,4);										// sinon cela veut dire qu'on a tout traverse et la valeur la plus grand est bien la valeur du debut, donc un push et rotate
-			tri(a,b,6);
-			return;
+			if (current->content < current->next->content && nbr > current->next->content)
+				break;
+			count++;
+			current = current->next;
 		}
-		count++;
-		current = current ->next;
-	}
 	order(a,b,count);
 }
+
+
+
+
+
+// void	hundred(t_list **a, t_list **b)
+// {
+// 	t_list	*current;
+// 	int		count;
+// 	int		nbr;
+
+// 	current = *a;
+// 	count = 1; 
+// 	nbr = ft_lstlast(*b)->content;
+// 	while (current != NULL)
+// 	{
+// 		if (nbr < current->content && (current->next == NULL || nbr > current->next->content))
+// 			break ;
+// 		else if (nbr > current->content) // si nbr plus grand que valeur et valeur.suivante
+// 		{
+// 			if (current->next == NULL || current->content < current->next->content)
+// 			{
+// 				if (ft_lstlast(current)->content > nbr)
+// 				{
+// 					tri(a, b, 4);
+// 					return;
+// 				}
+// 				break ;
+// 			}
+// 		}
+// 		count++;
+// 		current = current ->next;
+// 	}
+// 	printf("count : %d / %d", count, nbr);
+// 	order(a,b,count);
+// }
 
 void	order(t_list **a, t_list **b, int count)
 {
@@ -97,7 +128,7 @@ void	order(t_list **a, t_list **b, int count)
 	}
 }
 
-void	sort(t_list **stack)
+void	sort(t_list **stack, t_list **b)
 {
 	t_list	*current;
 	int		nbr;
@@ -122,7 +153,7 @@ void	sort(t_list **stack)
 	{
 		while (count > 0)		
 		{
-			tri(stack, NULL, 9);
+			tri(stack, b, 9);
 			count--;
 		}
 	}
@@ -131,7 +162,7 @@ void	sort(t_list **stack)
 		count = ft_lstsize(*stack) - count;
 		while (count > 0)		
 		{
-			tri(stack, NULL, 6);
+			tri(stack, b, 6);
 			count--;
 		}
 	}
@@ -142,13 +173,13 @@ void	five(t_list **a, t_list **b)
 {
 	tri(a, b, 5);
 	tri(a, b, 5);
-	three(a);
+	three(a, b);
 	hundred(a, b);
 	hundred(a, b);
 }
 
 
-void	three(t_list **a)
+void	three(t_list **a, t_list **b)
 {
 	int	top;
 	int	mid;
@@ -158,19 +189,19 @@ void	three(t_list **a)
 	mid = (*a)->next->content;
 	bot = (*a)->content;
 	if (bot > mid && bot < top && mid < top)
-		tri(a, NULL, 6);
+		tri(a, b, 6);
 	else if (bot < mid && bot < top && mid < top)
 	{
-		tri(a,  NULL, 1);
-		tri(a, NULL, 9);
+		tri(a,  b, 1);
+		tri(a, b, 9);
 	}
 	else if (bot > mid && bot > top && mid < top)
-		tri(a, NULL, 1);
+		tri(a, b, 1);
 	else if (bot < mid && bot > top && mid > top)
 	{
-		tri(a, NULL, 1);
-		tri(a, NULL, 6);
+		tri(a, b, 1);
+		tri(a, b, 6);
 	}
 	else if (bot < mid && bot < top && mid > top)
-		tri(a, NULL, 9);
+		tri(a, b, 9);
 }
