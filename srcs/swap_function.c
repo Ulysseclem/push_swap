@@ -6,28 +6,12 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:37:03 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/09 15:38:57 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:59:14 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
-
-// void	pair_swap(t_list **head)
-// {
-// 	t_list	*curr;
-// 	t_list	*prev;
-
-// 	if (!head)
-// 		return ;
-// 	if (head == NULL || (*head)->next == NULL)
-// 		return ;
-// 	curr = (*head)->next->next;
-// 	prev = *head;
-// 	*head = (*head)->next;
-// 	(*head)->next = prev;
-// 	prev->next = curr;
-// }
 
 void	pair_swap(t_list **stack)
 {
@@ -56,8 +40,6 @@ void	pair_swap(t_list **stack)
 void	push(t_list **receiver, t_list **sender)
 {
 	t_list	*curr;
-	t_list	*prev;
-	t_list	*tmp;
 
 	if (*sender == NULL)
 		return ;
@@ -74,6 +56,14 @@ void	push(t_list **receiver, t_list **sender)
 		return ;
 	}
 	curr = *sender;
+	push_suite(receiver, curr);
+}
+
+void	push_suite(t_list **receiver, t_list *curr)
+{
+	t_list	*prev;
+	t_list	*tmp;
+
 	while (curr->next != NULL)
 	{
 		prev = curr;
@@ -113,81 +103,4 @@ void	reverse(t_list	**stack)
 	current = ft_lstlast(*stack);
 	current->next = tmp;
 	*stack = (*stack)->next;
-}
-
-void	tri(t_list **stack_a, t_list **stack_b, int call)
-{
-	if (call == 1)
-		pair_swap(stack_a);
-	else if (call == 2)
-		pair_swap(stack_b);
-	else if (call == 3)
-	{
-		pair_swap(stack_b);
-		pair_swap(stack_b);
-	}
-	else if (call == 4)
-		push(stack_a, stack_b);
-	else if (call == 5)
-		push(stack_b, stack_a);
-	else if (call == 6)
-		rotate(stack_a);
-	else if (call == 7)
-		rotate(stack_b);
-	else if (call == 8)
-	{
-		rotate(stack_b);
-		rotate(stack_b);
-	}
-	else if (call > 8)
-		tri_2(stack_a, stack_b, call);
-	print_tri(call,*stack_a ,*stack_b);
-}
-
-
-void	tri_2(t_list **stack_a, t_list **stack_b, int call)
-{
-	if (call == 9)
-		reverse(stack_a);
-	else if (call == 10)
-		reverse(stack_b);
-	else if (call == 11)
-	{
-		reverse(stack_b);
-		reverse(stack_b);
-	}
-}
-
-void	print_tri(int call, t_list *a, t_list *b)
-{	
-	static int	count;
-
-	count = count + 0;
-	if (call == 1)
-		printf("sa\n");
-	if (call == 2)
-		printf("sb\n");
-	if (call == 3)
-		printf("ss\n");
-	if (call == 4)
-		printf("pa\n");
-	if (call == 5)
-		printf("pb\n");
-	if (call == 6)
-		printf("ra\n");
-	if (call == 7)
-		printf("rb\n");
-	if (call == 8)
-		printf("rr\n");
-	if (call == 9)
-		printf("rra\n");
-	if (call == 10)
-		printf("rrb\n");
-	if (call == 11)
-		printf("rrr\n");
-	count++;
-	(void) a;
-	(void) b;
-	// printf("%d\n", count);
-	// print_list(a, b);
 }

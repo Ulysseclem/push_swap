@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:12:39 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/26 19:06:29 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:50:24 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_list	*dele(t_list *head)
 		prev = current;
 		current = current->next;
 	}
-
 	prev->next = NULL;
 	if (current != NULL)
 		free(current);
@@ -43,16 +42,41 @@ t_list	*ps_lstnew(int content)
 	return (new);
 }
 
-void	free_lst(t_list	*lst)
+void	free_lst(t_list	**lst)
 {
-	t_list	*current;
-	t_list	*next;
+	t_list	*tmp;
 
-	current = lst;
-	while (current)
+	while ((*lst) != NULL)
 	{
-		next = current->next;
-		free(current);
-		current = next;
+		tmp = (*lst);
+		(*lst) = (*lst)->next;
+		free(tmp);
 	}
+}
+
+long long int	ps_atoi(const char *nptr)
+{
+	long long int	num;
+	int				i;
+	long long int	neg;
+
+	i = 0;
+	num = 0;
+	neg = 1;
+	while ((nptr[i] >= 8 && nptr[i] <= 13) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '+' || nptr[i] == '-')
+	{
+		if (nptr[i] == '-')
+			neg = -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		num = num * 10 + (nptr[i] - 48);
+		if (nptr[i] < '0' && nptr[i] > '9')
+			error_exit();
+		i++;
+	}
+	return (num * neg);
 }

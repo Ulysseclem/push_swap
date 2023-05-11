@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 10:08:42 by uclement          #+#    #+#             */
-/*   Updated: 2023/04/25 10:55:40 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:01:39 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,17 @@ int	parsing(t_list	*lst)
 			tmp = tmp->next;
 		}
 		lst = lst->next;
+	}
+	return (1);
+}
+
+int	is_sort(t_list *a)
+{
+	while (a->content > a->next->content)
+	{
+		a = a->next;
+		if (a->next == NULL)
+			return (0);
 	}
 	return (1);
 }

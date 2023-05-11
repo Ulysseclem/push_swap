@@ -11,8 +11,10 @@ SRCS		= ./srcs/push_swap.c \
 			  ./srcs/swap_function.c \
 			  ./srcs/swap_utils.c \
 			  ./srcs/parsing.c \
-			  ./srcs/radix.c \
+			  ./srcs/sort.c \
 			  ./srcs/move_calculator.c \
+			  ./srcs/move_maker.c \
+			  ./srcs/count_calcul.c \
 
 OBJS		= ${SRCS:.c=.o}
 
@@ -21,7 +23,7 @@ NAME		= push_swap
 CC			= gcc -g
 RM			= rm -f
 
-CFLAGS		= -Wall -Wextra -Werror -Iincludes
+CFLAGS		= -Wall -Wextra -Werror -Iincludes 
 
 MAKEFLAG = ${MAKE} --no-print-directory
 

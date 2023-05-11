@@ -6,17 +6,17 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:40:15 by uclement          #+#    #+#             */
-/*   Updated: 2023/01/13 17:41:44 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:32:20 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char*nptr)
+long long int	ft_atoi(const char *nptr)
 {
-	int	num;
+	long long int	num;
 	int	i;
-	int	neg;
+	long long int	neg;
 
 	i = 0;
 	num = 0;

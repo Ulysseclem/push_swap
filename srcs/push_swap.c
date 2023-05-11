@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:45:52 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/09 16:02:45 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:54:27 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,89 +43,58 @@ void	error_exit(void)
 	exit (0);
 }
 
-void	to_list_a(char *argv, t_list **stack_a)
+void	to_list_a(char **argv, int argc, t_list **stack_a)
 {
-	int				nbr;
+	long long int	nbr;
 	t_list			*new_node;
+	int				i;
 
-	new_node = malloc(sizeof(t_list));
-	if (!new_node)
-		return ;
-	nbr = ft_atoi(argv);
-	new_node->content = nbr;
-	new_node->index = 0;
-	new_node->next = NULL;
-	ft_lstadd_front(stack_a, new_node);
-}
-
-void	print_list(t_list *a, t_list *b)
-{
-	while (a != NULL || b != NULL)
+	i = 1;
+	if (argc <= 2)
+		error_exit();
+	while (i < argc)
 	{
-		if (b == NULL)
-			b = ft_lstnew(NULL);
-		if (a == NULL)
-			a = ft_lstnew(NULL);
-		printf("| %d | %d |V| %d | %d |\n", a->content,a->index, b->content, b->index);
-		if (a != NULL)
-			a = a->next;
-		if (b != NULL)
-			b = b->next;
-	}
-}
-void	print_index(t_list *node)
-{
-	while (node != NULL)
-	{
-		printf("%d ", node->index);
-		node = node->next;
-	}
-}
-void	clean_index(t_list **stack)
-{
-	t_list *node;
-
-	node = *stack;
-	while (node != NULL)
-	{
-		node->index = 0;
-		node = node->next;
+		new_node = malloc(sizeof(t_list));
+		if (!new_node)
+			return ;
+		nbr = ps_atoi(argv[i]);
+		if (nbr > 2147483647 || nbr < -2147483648)
+			error_exit();
+		new_node->content = nbr;
+		new_node->index = 0;
+		new_node->next = NULL;
+		ft_lstadd_front(stack_a, new_node);
+		i++;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	int	i;
-	t_list	*stack_a = NULL;
-	t_list	*stack_b = NULL;
+	t_list	*stack_a;
+	t_list	*stack_b;
 
-	i = 1;
-	if (argc <= 1)
-		error_exit();
-	while (i < argc)
-	{
-		to_list_a(argv[i], &stack_a);
-		i++;
-	}
+	stack_a = malloc(sizeof(t_list));
+	if (!stack_a)
+		return (0);
+	stack_b = malloc(sizeof(t_list));
+	if (!stack_b)
+		return (0);
+	stack_a = NULL;
+	stack_b = NULL;
+	to_list_a(argv, argc, &stack_a);
 	if (parsing(stack_a) == 0)
 		error_exit();
+	if (is_sort(stack_a) == 0)
+	{
+		free_lst(&stack_a);
+		free_lst(&stack_b);
+		return (0);
+	}
 	index_maker(&stack_a);
-	// print_list(stack_a, stack_b);
-	// printf("\n");
-
-	// three(&stack_a);
 	median_sort(&stack_a, &stack_b);
-	clean_index(&stack_a);
-	clean_index(&stack_b);
-	
-	while(stack_b)
-		index_mover(&stack_a, &stack_b);
-	sort(&stack_a, &stack_b);
-
-
-	// five(&stack_a, &stack_b);
-	print_list(stack_a,stack_b);
-
-	free_lst(stack_a);
+	while (stack_b)
+		iter_index(&stack_a, &stack_b);
+	last_sort(&stack_a, &stack_b);
+	free_lst(&stack_a);
+	free_lst(&stack_b);
 }
-
