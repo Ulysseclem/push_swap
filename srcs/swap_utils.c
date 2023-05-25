@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulysse <ulysse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:12:39 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/11 17:50:24 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:14:38 by ulysse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ void	free_lst(t_list	**lst)
 	{
 		tmp = (*lst);
 		(*lst) = (*lst)->next;
+		free(tmp);
+	}
+}
+
+void	free_lst_2(t_list	*lst)
+{
+	t_list	*tmp;
+
+	while ((lst) != NULL)
+	{
+		tmp = (lst);
+		(lst) = (lst)->next;
 		free(tmp);
 	}
 }

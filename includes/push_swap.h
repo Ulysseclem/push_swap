@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulysse <ulysse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:28:29 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/11 17:43:16 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:57:56 by ulysse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ long long int	ps_atoi(const char *nptr);
 void	push_suite(t_list **receiver, t_list *curr);
 int	iter_i_min(t_list **b, int min);
 
-void	free_lst_test(t_list	*lst);
+void	free_lst_2(t_list	*lst);
 
 #endif
