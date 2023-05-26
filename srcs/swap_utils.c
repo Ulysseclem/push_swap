@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulysse <ulysse@student.42.fr>              +#+  +:+       +#+        */
+/*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:12:39 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/24 14:14:38 by ulysse           ###   ########.fr       */
+/*   Updated: 2023/05/26 16:10:29 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ t_list	*ps_lstnew(int content)
 {
 	t_list	*new;
 
-	new = malloc(sizeof(*new));
+	new = malloc(sizeof(t_list));
 	if (!new)
 		return (NULL);
 	new->content = content;
+	new->index = 0;
 	new->next = NULL;
 	return (new);
 }
@@ -54,16 +55,17 @@ void	free_lst(t_list	**lst)
 	}
 }
 
-void	free_lst_2(t_list	*lst)
+t_list	*create_stack(int content)
 {
-	t_list	*tmp;
+	t_list	*stack;
 
-	while ((lst) != NULL)
-	{
-		tmp = (lst);
-		(lst) = (lst)->next;
-		free(tmp);
-	}
+	stack = malloc(sizeof(t_list));
+	if (!stack)
+		return (NULL);
+	stack->content = content;
+	stack->index = 0;
+	stack->next = NULL;
+	return (stack);
 }
 
 long long int	ps_atoi(const char *nptr)

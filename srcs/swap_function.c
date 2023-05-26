@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:37:03 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/11 15:59:14 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:26:07 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,25 +82,27 @@ void	push_suite(t_list **receiver, t_list *curr)
 void	rotate(t_list **stack)
 {
 	t_list	*tmp;
-	t_list	*current;
+	t_list	*end;
 
-	current = ft_lstlast(*stack);
-	tmp = ps_lstnew(current->content);
-	tmp->index = current->index;
-	tmp->next = NULL;
-	ft_lstadd_front(stack, tmp);
-	*stack = dele(*stack);
+	if (!(*stack) || !((*stack)->next))
+		return ;
+	tmp = *stack;
+	end = ft_lstlast(*stack);
+	while ((*stack)->next->next)
+		*stack = (*stack)->next;
+	end->next = tmp;
+	(*stack)->next = NULL;
+	*stack = end;
 }
 
 void	reverse(t_list	**stack)
 {
-	t_list	*tmp;
-	t_list	*current;
+	t_list	*head;
 
-	tmp = ps_lstnew((*stack)->content);
-	tmp->index = (*stack)->index;
-	tmp->next = NULL;
-	current = ft_lstlast(*stack);
-	current->next = tmp;
-	*stack = (*stack)->next;
+	head = *stack;
+	if (!(*stack) || !((*stack)->next))
+		return ;
+	*stack = head->next;
+	head->next = NULL;
+	ft_lstlast(*stack)->next = head;
 }

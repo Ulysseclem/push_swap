@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:48:18 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/11 17:19:48 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:57:40 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,28 +58,26 @@ void	compteur(instruct *count, int call)
 void	search_index_min(t_list **a, t_list **b)
 {
 	t_list	*current;
-	t_list	*min;
+	int		min;
+	int		test;
 
-	min = ft_lstnew(NULL);
 	current = *b;
-	min->index = current->index;
-	min->content = current->content;
+	test = current->content;
 	if (current->next == NULL)
 	{
-		sort_b_stack(a, b, min->content);
+		sort_b_stack(a, b, test);
 		return ;
 	}
 	while (current != NULL)
 	{
-		if (current->index < min->index)
+		if (current->index < test)
 		{
-			min->index = current->index;
-			min->content = current->content;
+			test = current->index;
+			min = current->content;
 		}
 		current = current->next;
 	}
-	sort_b_stack(a, b, min->content);
-	free_lst(&min);
+	sort_b_stack(a, b, min);
 }
 
 void	sort_b_stack(t_list **a, t_list **b, int min)
