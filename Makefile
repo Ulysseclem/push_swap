@@ -15,6 +15,7 @@ SRCS		= ./srcs/push_swap.c \
 			  ./srcs/move_calculator.c \
 			  ./srcs/move_maker.c \
 			  ./srcs/count_calcul.c \
+			  ./srcs/sort_median.c \
 
 OBJS		= ${SRCS:.c=.o}
 

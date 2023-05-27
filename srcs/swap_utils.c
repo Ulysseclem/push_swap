@@ -6,42 +6,12 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 15:12:39 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/26 16:36:54 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:49:21 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
-
-t_list	*dele(t_list *head)
-{
-	t_list	*current;
-	t_list	*prev;
-
-	current = head;
-	while (current->next != NULL)
-	{
-		prev = current;
-		current = current->next;
-	}
-	prev->next = NULL;
-	if (current != NULL)
-		free(current);
-	return (head);
-}
-
-t_list	*ps_lstnew(int content)
-{
-	t_list	*new;
-
-	new = malloc(sizeof(t_list));
-	if (!new)
-		return (NULL);
-	new->content = content;
-	new->index = 0;
-	new->next = NULL;
-	return (new);
-}
 
 void	free_lst(t_list	**lst)
 {

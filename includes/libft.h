@@ -6,17 +6,15 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:14:37 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/11 15:19:51 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:38:48 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
-
 
 typedef struct s_list
 {
@@ -64,7 +62,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
-long long int	ft_atoi(const char *nptr);
+int		ft_atoi(const char *nptr);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 void	ft_putchar_fd(char c, int fd);
@@ -81,8 +79,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
-
-
-
 
 #endif
