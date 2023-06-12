@@ -6,12 +6,36 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:45:52 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/27 14:09:31 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:36:57 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
+
+void	index_maker(t_list **stack)
+{
+	t_list	*tmp;
+	t_list	*first;
+	int		i;
+
+	first = *stack;
+	tmp = (*stack)->next;
+	while ((*stack) != NULL)
+	{		
+		i = 1;
+		while (tmp != NULL)
+		{
+			if (((*stack)->content) > (tmp->content))
+				i++;
+			tmp = tmp->next;
+		}
+		tmp = first;
+		(*stack)->index = i;
+		*stack = (*stack)->next;
+	}
+	*stack = first;
+}
 
 void	error_exit(void)
 {
@@ -50,6 +74,7 @@ int	main(int argc, char **argv)
 	t_list	*stack_b;
 
 	stack_b = NULL;
+
 	to_list_a(argv, argc, &stack_a);
 	if (parsing(stack_a) == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: uclement <uclement@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:48:18 by uclement          #+#    #+#             */
-/*   Updated: 2023/05/27 15:37:24 by uclement         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:57:40 by uclement         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	calculateur(t_list **b, int call)
 {
-	static t_instruct	count;
-	int					size;
+	static instruct	count;
+	int				size;
 
 	compteur(&count, call);
 	if (count.pa >= 1)
@@ -29,7 +29,7 @@ void	calculateur(t_list **b, int call)
 	}
 }
 
-void	compteur(t_instruct *count, int call)
+void	compteur(instruct *count, int call)
 {
 	if (call == 1)
 		count->sa = 1 + count->sa;
